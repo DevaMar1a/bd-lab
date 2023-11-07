@@ -1,4 +1,4 @@
-/*Выберите теннисные корты, заброниррованные пользователями на 19 сентября 2012 года*/
+/* Выберите теннисные корты, заброниррованные пользователями на 19 сентября 2012 года */
 USE cd;
 SELECT facilities.facility FROM facilities
 INNER JOIN bookings ON facilities.facid = bookings.facid

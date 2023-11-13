@@ -2,8 +2,9 @@
 удалите всех членов клуба, которые не арендовали объекты клуба. 
 Проверьте есть ли в клубе член с mimid = 37 */
 USE cd;
-SELECT * from members
-where memid not in(select distinct memid from bookings);
+SELECT * FROM members
+WHERE memid NOT IN (SELECT DISTINCT memid FROM bookings);
 DELETE FROM members
-WHERE memid not in (select memid from bookings);
-select * from members where memid = 37;
+WHERE memid NOT IN (SELECT memid FROM bookings);
+SELECT * FROM members WHERE memid = 37;
+SELECT * FROM members;

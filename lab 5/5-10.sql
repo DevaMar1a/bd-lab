@@ -1,12 +1,5 @@
 /*  список общего количества мест, забронированных на 
 один объект в месяц в 2012 году */
-USE cd;
-SELECT bookings.facid,
-MONTH(bookings.starttime) AS month,
-COUNT(*) AS slots
-FROM bookings
-INNER JOIN facilities ON bookings.facid = facilities.facid
-WHERE YEAR(bookings.starttime) = 2012
-GROUP BY bookings.facid, MONTH(bookings.starttime)
-WITH ROLLUP
-ORDER BY bookings.facid, MONTH(bookings.starttime);
+USE cd; 
+SELECT facid, MONTH(starttime) AS month, IFNULL(SUM(slots), 0) AS 'Количество забронированных мест'
+FROM bookings WHERE YEAR(starttime) = 2012 GROUP BY facid, month WITH ROLLUP;

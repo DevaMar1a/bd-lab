@@ -3,5 +3,9 @@
 округленные часы и звание. Сортировка по званию, фамилии и имени.
 Примечание: используйте функцию ранжирования*/
 USE cd;
-SELECT CONCAT(m.firstname, ' ', m.surname) AS 'ФИО', ROUND(SUM(COALESCE(b.slots / 2, 0)), -1) AS 'Количество часов', RANK() OVER (ORDER BY ROUND(SUM(COALESCE(b.slots / 2, 0)), -1)) AS ranks FROM members m
-LEFT JOIN bookings b ON m.memid = b.memid GROUP BY m.memid ORDER BY m.surname, m.firstname;
+SELECT mem.firstname AS 'Имя', mem.surname AS 'Фамилия', ROUND(SUM(COALESCE(book.slots / 2, 0)) -1) AS 'Округлённые часы',
+RANK() OVER (ORDER BY ROUND(SUM(COALESCE(book.slots / 2, 0)), -1)) AS Ранг
+FROM members AS mem
+LEFT JOIN bookings AS book ON mem.memid = book.memid
+GROUP BY mem.memid
+ORDER BY Ранг, mem.surname, mem.firstname;

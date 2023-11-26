@@ -1,5 +1,8 @@
 /* количество аренд каждого из объектов клуба за 
 сентябрь 2012 года */
 USE cd;
-SELECT facility, sum(b.slots) AS 'Количество аренд' FROM facilities f 
-INNER JOIN bookings AS b ON b.facid = f.facid WHERE DATE(b.starttime) >= '2012-09-01' AND DATE(b.starttime) <= '2012-09-30' GROUP BY f.facid;
+SELECT facility AS 'Объекты клуба', SUM(book.slots) AS 'Кол-во аренд'
+FROM facilities AS fac
+INNER JOIN bookings AS book ON book.facid = fac.facid
+WHERE book.starttime >= '2012-09-01' AND book.starttime < '2012-10-01'
+GROUP BY fac.facid;

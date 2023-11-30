@@ -1,3 +1,5 @@
 /*Выведите все объектов клуба, если они содержат в названии слово  ‘Tennis’ в произвольном регистре.*/
 USE cd;
-SELECT facility FROM facilities WHERE facility LIKE '%Tennis%' AS '%tennis%';
+SELECT f.facility
+  FROM facilities f
+  WHERE f.facility LIKE '%Tennis%'

@@ -10,13 +10,10 @@ WITH RECURSIVE DateRange AS (
 TotalRevenue AS(
 SELECT DateRange.Date, SUM(
 		CASE 
-			WHEN(DATE(b.starttime) != Date) THEN 0
-            WHEN (b.memid = 0) THEN f.guestcost * b.slots
-            ELSE f.membercost * b.slots
+			WHEN(DATE(b.starttime) != Date) THEN 0 WHEN (b.memid = 0) THEN f.guestcost * b.slots ELSE f.membercost * b.slots
         END) AS Доход,
 		(SUM(
-        IF(b.memid = 0, f.guestcost, f.membercost) * b.slots
-    ) / 15) as Среднее_скользящее
+        IF(b.memid = 0, f.guestcost, f.membercost) * b.slots) / 15) as Среднее_скользящее
     FROM DateRange
     LEFT JOIN bookings b ON DATE_ADD(Date, INTERVAL -14 day) <= DATE(b.starttime) AND DATE(b.starttime) <= Date
     LEFT JOIN facilities f ON b.facid = f.facid
